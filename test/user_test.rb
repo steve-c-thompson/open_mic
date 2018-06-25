@@ -66,4 +66,10 @@ class UserTest < Minitest::Test
     assert_equal 1, josh.jokes[0].id
     assert_equal 2, josh.jokes[1].id
   end
+
+  def test_user_can_learn_routine_by_reading_line_from_file
+    casey = User.new("Casey")
+    casey.learn_routine('./jokes.csv')
+    assert_equal 100, casey.jokes.count
+  end
 end
