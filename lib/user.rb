@@ -12,5 +12,9 @@ class User
     @jokes.push(joke) if joke
   end
 
+  def tell(user, joke)
+    user.jokes.push(joke)
+  end
+
 
 end

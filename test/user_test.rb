@@ -43,4 +43,13 @@ class UserTest < Minitest::Test
     refute_nil sal.jokes
     assert_equal 0, sal.jokes.length
   end
+
+  def test_users_can_tell_jokes_to_other_users
+    joke = Joke.new({id: 1, question: "Why did the strawberry cross the road?", answer: "Because his mother was in a jam."})
+    sal = User.new("Sal")
+    ali = User.new("Ali")
+    sal.tell(ali, joke)
+    assert_equal 1, ali.jokes.count
+    assert_equal 1, ali.jokes[0].id
+  end
 end
