@@ -52,4 +52,18 @@ class UserTest < Minitest::Test
     assert_equal 1, ali.jokes.count
     assert_equal 1, ali.jokes[0].id
   end
+
+  def test_users_can_perform_routines_and_give_all_jokes_to_other_user
+    joke_1 = Joke.new({id: 1, question: "Why did the strawberry cross the road?", answer: "Because his mother was in a jam."})
+    joke_2 = Joke.new({id: 2, question: "How do you keep a lion from charging?", answer: "Take away its credit cards."})
+    ilana = User.new("Ilana")
+    josh = User.new("Josh")
+
+    ilana.learn(joke_1)
+    ilana.learn(joke_2)
+    ilana.perform_routine_for(josh)
+    assert_equal 2, josh.jokes.count
+    assert_equal 1, josh.jokes[0].id
+    assert_equal 2, josh.jokes[1].id
+  end
 end
